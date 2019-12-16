@@ -1,6 +1,6 @@
 package com.feragusper.buenosairesantesydespues.presenter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.feragusper.buenosairesantesydespues.di.PerActivity;
 import com.feragusper.buenosairesantesydespues.domain.exception.DefaultErrorBundle;
@@ -37,7 +37,6 @@ public class HistoricalRecordListPresenter extends DefaultSubscriber<List<Histor
     private Collection<HistoricalRecord> historicalRecords = new ArrayList<>();
     private int page;
 
-    @SuppressWarnings("WeakerAccess")
     @Inject
     public HistoricalRecordListPresenter(@Named("historicalRecordList") GetHistoricalRecordListUseCase getHistoricalRecordListUseCase, HistoricalRecordModelDataMapper historicalRecordModelDataMapper) {
         this.getHistoricalRecordListUseCase = getHistoricalRecordListUseCase;

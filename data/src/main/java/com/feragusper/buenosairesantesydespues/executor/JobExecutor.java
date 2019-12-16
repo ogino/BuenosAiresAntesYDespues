@@ -1,6 +1,6 @@
 package com.feragusper.buenosairesantesydespues.executor;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.feragusper.buenosairesantesydespues.domain.executor.ThreadExecutor;
 

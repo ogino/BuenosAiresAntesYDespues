@@ -4,12 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.feragusper.buenosairesantesydespues.R;
 import com.feragusper.buenosairesantesydespues.di.components.HistoricalRecordComponent;
@@ -30,9 +31,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.Optional;
+import butterknife.Unbinder;
 
 /**
  * @author Fernando.Perez
@@ -45,28 +46,24 @@ public class HistoricalRecordDetailsFragment extends BaseFragment implements His
     //region Properties
     private static final String ARGUMENT_KEY_HISTORICAL_RECORD_ID = "com.feragusper.buenosairesantesydespues.ARGUMENT_HISTORICAL_RECORD_ID";
     @Inject
-    HistoricalRecordDetailsPresenter historicalRecordDetailsPresenter;
-    @InjectView(R.id.siv_before_after)
+    private HistoricalRecordDetailsPresenter historicalRecordDetailsPresenter;
+    @BindView(R.id.siv_before_after)
     SlideImageView slideImageView;
-    @InjectView(R.id.rl_progress)
+    @BindView(R.id.rl_progress)
     RelativeLayout rl_progress;
-    @Optional
-    @InjectView(R.id.tv_historical_record_address)
+    @BindView(R.id.tv_historical_record_address)
     TextView address;
-    @Optional
-    @InjectView(R.id.tv_historical_record_description)
+    @BindView(R.id.tv_historical_record_description)
     TextView description;
-    @Optional
-    @InjectView(R.id.tv_historical_record_year_neighborhood)
+    @BindView(R.id.tv_historical_record_year_neighborhood)
     TextView yearAndNeighborhood;
-    @Optional
-    @InjectView(R.id.iv_historical_record_share)
+    @BindView(R.id.iv_historical_record_share)
     View ivHistoricalRecordShare;
-    @Optional
-    @InjectView(R.id.tv_credits)
+    @BindView(R.id.tv_credits)
     TextView credits;
     private String historicalRecordId;
     private GoogleMap mMap;
+    private Unbinder unbinder;
     //endregion
 
     //region Public Static Implementation
@@ -150,7 +147,7 @@ public class HistoricalRecordDetailsFragment extends BaseFragment implements His
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View fragmentView = inflater.inflate(R.layout.fragment_historical_record_details, container, false);
-        ButterKnife.inject(this, fragmentView);
+        ButterKnife.bind(this, fragmentView);
 
         return fragmentView;
     }
@@ -195,7 +192,7 @@ public class HistoricalRecordDetailsFragment extends BaseFragment implements His
         super.onDestroy();
         this.historicalRecordDetailsPresenter.destroy();
         slideImageView.reset();
-        ButterKnife.reset(this);
+        unbinder.unbind();
     }
 
     //region Private Implementation

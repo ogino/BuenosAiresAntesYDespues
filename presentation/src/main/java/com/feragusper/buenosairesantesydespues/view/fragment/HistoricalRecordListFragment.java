@@ -4,14 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.feragusper.buenosairesantesydespues.R;
 import com.feragusper.buenosairesantesydespues.di.components.HistoricalRecordComponent;
@@ -20,14 +20,15 @@ import com.feragusper.buenosairesantesydespues.presenter.HistoricalRecordListPre
 import com.feragusper.buenosairesantesydespues.view.HistoricalRecordListView;
 import com.feragusper.buenosairesantesydespues.view.adapter.HistoricalRecordListAdapter;
 import com.feragusper.buenosairesantesydespues.view.widget.EndlessRecyclerViewScrollListener;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * @author Fernando.Perez
@@ -39,13 +40,13 @@ public class HistoricalRecordListFragment extends BaseFragment implements Histor
 
     @Inject
     HistoricalRecordListPresenter presenter;
-    @InjectView(R.id.rv_historicalRecords)
+    @BindView(R.id.rv_historicalRecords)
     RecyclerView rv_historicalRecords;
-    @InjectView(R.id.rl_progress)
+    @BindView(R.id.rl_progress)
     View rl_progress;
-    @InjectView(R.id.ll_empty_view)
+    @BindView(R.id.ll_empty_view)
     View ll_empty_view;
-    @InjectView(R.id.coordinatorLayout)
+    @BindView(R.id.coordinatorLayout)
     CoordinatorLayout cl_coordinatorLayout;
     private EndlessRecyclerViewScrollListener endlessRecyclerViewScrollListener;
     private HistoricalRecordListAdapter historicalRecordListAdapter;
@@ -149,7 +150,7 @@ public class HistoricalRecordListFragment extends BaseFragment implements Histor
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_historical_record_list, container, true);
-        ButterKnife.inject(this, fragmentView);
+        ButterKnife.bind(this, fragmentView);
         setupUI();
 
         return fragmentView;

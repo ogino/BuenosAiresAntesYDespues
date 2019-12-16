@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.7.1'
     }
 }
 
@@ -12,7 +12,6 @@ repositories {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -50,18 +49,21 @@ android {
 }
 
 dependencies {
-    compile project(':domain')
+    implementation project(':domain')
 
-    compile "com.google.dagger:dagger:${rootProject.ext.daggerVersion}"
-    compile "com.squareup.okhttp:okhttp:2.3.0"
-    compile "com.google.code.gson:gson:2.3"
-    compile "io.reactivex:rxandroid:${rootProject.ext.rxAndroidVersion}"
-    compile "com.android.support:support-annotations:${rootProject.ext.androidAnnotationsVersion}"
-    compile "com.facebook.stetho:stetho-okhttp:1.2.0"
-    compile 'com.squareup.okhttp:logging-interceptor:+'
+    implementation "com.google.dagger:dagger:${rootProject.ext.daggerVersion}"
+    implementation "com.google.dagger:dagger-android:${rootProject.ext.daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${rootProject.ext.daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${rootProject.ext.daggerVersion}"
+    implementation "com.squareup.okhttp3:okhttp:4.2.2"
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation "io.reactivex:rxandroid:${rootProject.ext.rxAndroidVersion}"
+    implementation "com.android.support:support-annotations:${rootProject.ext.androidAnnotationsVersion}"
+    implementation "com.facebook.stetho:stetho-okhttp:1.5.1"
+    implementation 'com.squareup.okhttp:logging-interceptor:2.7.5'
 
-    testCompile "junit:junit:4.12"
-    testCompile "org.mockito:mockito-core:1.9.5"
-    testCompile "org.robolectric:robolectric:3.1.1"
-    testApt "com.google.dagger:dagger-compiler:2.0"
+    testImplementation "junit:junit:4.12"
+    testImplementation 'org.mockito:mockito-core:3.2.0'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+    testImplementation 'com.google.auto.service:auto-service:1.0-rc4'
 }

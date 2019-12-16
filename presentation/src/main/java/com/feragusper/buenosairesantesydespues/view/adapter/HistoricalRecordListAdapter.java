@@ -1,13 +1,15 @@
 package com.feragusper.buenosairesantesydespues.view.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.feragusper.buenosairesantesydespues.R;
 import com.feragusper.buenosairesantesydespues.model.HistoricalRecordModel;
@@ -17,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * @author Fernando.Perez
@@ -49,15 +51,15 @@ public class HistoricalRecordListAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     static class HistoricalRecordViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.title)
+        @BindView(R.id.title)
         TextView textViewTitle;
 
-        @InjectView(R.id.avatar)
+        @BindView(R.id.avatar)
         ImageView avatar;
 
         HistoricalRecordViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -76,8 +78,9 @@ public class HistoricalRecordListAdapter extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder view = null;
         if (viewType == VIEW_TYPE_ITEM) {
             view = new HistoricalRecordViewHolder(layoutInflater.inflate(R.layout.historical_record_item, parent, false));
@@ -89,11 +92,11 @@ public class HistoricalRecordListAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof HistoricalRecordViewHolder) {
             final HistoricalRecordModel historicalRecordModel = this.historicalRecordsCollection.get(position);
             ((HistoricalRecordViewHolder) holder).textViewTitle.setText(historicalRecordModel.getTitle());
-            Picasso.with(context).load(historicalRecordModel.getThumbnail()).placeholder(R.drawable.loading).into(((HistoricalRecordViewHolder) holder).avatar);
+            Picasso.get().load(historicalRecordModel.getThumbnail()).placeholder(R.drawable.loading).into(((HistoricalRecordViewHolder) holder).avatar);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
